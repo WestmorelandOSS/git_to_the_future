@@ -1,0 +1,142 @@
+include ./shared/slide_mixins
+
++slideGroup
+  +imageSlide("So you wanna be a timelord?", "images/baker_time_lord.jpg")
+  +imageSlide("Lets get Interactive", "images/i-dont-always-rebase-but-when-i-do-i-do-it-interactively-i.jpg")
+  +littleTitleSlide("Why Interactive Rebase?")
+    :markdown
+      #### Because you are a badass that:
+      - always writes your code correctly the first time
+      - has never forgotten to commit a file
+      - writes only the most perfectly worded commit messages
+      
+      #### #sarcasm
+
+      Command: __git rebase -i [sha]...[other_sha]__
+
+  +littleTitleSlide("Start by defining a commit range")
+    :markdown
+      #### Lets assume you are on a feature branch right now
+      - The last commit is `HEAD`
+      - `master` should be where your branch started
+      - But master has a habbit of changing (thanks other people)
+
+      Command: __git rebase -i HEAD...[other_sha]__
+
+  +littleTitleSlide("Relative Range")
+    :markdown
+      #### Github/Gitlab is your bud
+      - Open your PR/MR early
+      - Let the tools show you how much of a mess you have made
+      - Own your mess with `~` and get relative
+
+      Command: __git rebase -i HEAD~4__
+
+  +imageSlide("Think Less", "images/numberofcommits.png")
+
+  +littleTitleSlide("Lets get setup")
+    :markdown
+      #### Can't Rebase with a dirty working copy so:
+      - Commit stuff
+      - Delete stuff
+      - Get crazy and stack it in the stash
+
+  +imageSlide("The Landscape", "images/rebase1.png")
+
+  +littleTitleSlide("Thundercats Hoooo!")
+    :markdown
+      Command: __git rebase -i HEAD~6__
+
+  +imageSlide("To VIM-land", "images/rebase2.png")
+
+  +littleTitleSlide("Wait a Text File!?")
+    :markdown
+      #### A look at history from oldest to newest
+      - You can reorder these commits (yy) copy (pp) paste (dd) delete
+      - Change actions at each commit p, r, e, s, f
+      - Continue with :wq (write quit)
+
+  +littleTitleSlide("P for Pick")
+    :markdown
+      Pick will use this commit in the position it is placed in the history. The default state of a commit.
+
+  +littleTitleSlide("R for Reword")
+    :markdown
+      As the rebase operation steps through the commit history it will pause and open a new vim buffer so you can rewrite the commit message.
+
+  +littleTitleSlide("E for Edit")
+    :markdown
+      Pause the rebase at this commit so the commit itself can be ammended. This is how you split one commit into multiple or delete files from a commit.
+
+  +littleTitleSlide("S for Squash")
+    :markdown
+      Similar to fixup except this will join the commit together with its message to the one above it 👆. You will have the opportunity to edit the commit message after when this is processed. That commit message will include all the squashed and final commits messages together. You can't squash your first commit.
+
+  +littleTitleSlide("S for Squash")
+    :markdown
+      Similar to squash except this will join the commit with the one above it 👆. The commit message will be lost and you will not be promped to edit the commit message. [FUP]
+
+  +imageSlide("Plan (touch things and get crazy)", "images/rebase3.png")
+
+  +imageSlide("Make a mess (get a conflict)", "images/rebase4.png")
+
+  +imageSlide("Get Gui (stage conflict resoltion)", "images/rebase5.png")
+
+  +imageSlide("Win (git rebase --continue)", "")
+
+  +imageSlide("Reword", "images/rebase6.png")
+
+  +littleTitleSlide("Wait what about the Edit?")
+    :markdown
+      #### Well I got confused
+      - Its hard to keep track of squash/fixup and edit at the same time.
+      - Don't feel back about making multiple passes. Keep your sanity in check.
+
+      #### Lets try again
+      Command __git reset --hard origin/feature-branch__
+
+  +littleTitleSlide("Thundercats Hoooo!")
+    :markdown
+      Command: __git rebase -i HEAD~6__
+
+  +imageSlide("Once More", "images/rebase2.2.png")
+
+  +imageSlide("Once More", "images/rebase2.3.png")
+
+  +imageSlide("Ahhhhhhhhmend", "images/rebase2.4.png")
+
+  +imageSlide("Split", "images/rebase2.5.png")
+
+  +imageSlide("Reword", "images/rebase2.6.png")
+
+  +littleTitleSlide("Ok lets get that extra commit outa here")
+    :markdown
+      - Command: __git checkout -b new_home_for_my_feature__
+      - Command: __git reset --hard origin/master__
+      - Command: __git cherry-pick [new sha]__
+      - Lets go cleanup the old branch
+
+  +littleTitleSlide("Guess what comes next. INTERACTIVE REBASE!")
+    :markdown
+      #### Command: __git checkout -__
+      #### Command: __git rebase -i HEAD~5__
+
+  +imageSlide("We can do this all day", "images/rebase3.1.png")
+
+  +imageSlide("Just delete that commit (dd)", "images/rebase3.2.png")
+
+  +bigTitleSlide("Congratulations")
+
+  +bigTitleSlide("Well.... we forgot about everybody else")
+
+  +imageSlide("git push -f", "images/git.push.force.gif")
+
+  +littleTitleSlide("Some advice")
+    :markdown
+      - Create branches and try things
+      - Don't `push -f` until you know it works
+      - Small increments of work make it easier
+      - When all else fails `git rebase --abort`
+      - Things go pear shaped? `git reset --hard origin/feature-branch`
+
+  +imageSlide("Now you are a timelord", "images/that_easy.jpg")
